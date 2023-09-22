@@ -1,5 +1,7 @@
 <?php
 
+# New comment
+
 # Define 4 different variables, which will
 # each represent how much a given coin is worth
 $penny_value = .01;
