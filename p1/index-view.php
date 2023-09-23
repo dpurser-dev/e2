@@ -72,7 +72,12 @@
         </tbody>
     </table>
 
-
+    <?php
+        foreach ($deck as &$card) {
+            echo $card[0];
+            echo $card[1];
+        }
+    ?>
 
 </body>
 
