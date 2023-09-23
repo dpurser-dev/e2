@@ -43,13 +43,8 @@
     </ul>
 
     <h2>Results</h2>
-    <ul>
-        <li>Rounds played: ADD PHP HERE </li>
-        <li>Winner: Player ADD PHP HERE </li>
-    </ul>
 
     <h2>Rounds</h2>
-    CREATE ROWS USING PHP FOR LOOP
     <table>
         <tbody>
             <tr>
@@ -72,11 +67,30 @@
         </tbody>
     </table>
 
-    <?php
+    <p>
+        <?php
         foreach ($deck as &$card) {
             echo $card[0];
             echo $card[1];
         }
+    ?>
+    </p>
+
+    <p><b>Player 1 deck lengh: </b><?php echo $player1_length ?></p>
+    <p><b>Player 2 deck lengh: </b><?php echo $player2_length ?></p>
+    <h2>Summary</h2>
+    <p><b>Winner: </b><?php echo $winner ?>
+    <p><b>Rounds: </b><?php echo $rounds ?>
+
+        <?php
+        for ($i = 0; $i < $rounds; $i++) { ?>
+    <p>
+        <b>Round: </b><?php echo $i ?>
+        <b>Winner: </b><?php echo $round_outcome[$i] ?>
+        <b>Cards played: </b><?php echo $round_cards[$i][0] ?>, <?php echo $round_cards[$i][1] ?>
+        <b>Card count: </b><?php echo $round_cardcounts[$i][0] ?>, <?php echo $round_cardcounts[$i][1] ?>
+    </p>
+    <?php }
     ?>
 
 </body>
