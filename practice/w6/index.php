@@ -2,8 +2,6 @@
 
 session_start();
 
-# var_dump($_SESSION);
-
 # Array of words and hints to choose from
 $words = [
     'evidence' => 'A discovery that helps solve a crime',
