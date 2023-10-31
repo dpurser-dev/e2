@@ -17,7 +17,7 @@
         <li>There are two players, you and the computer.</li>
         <li>Your marker is an "X", and the computer's marker is an "O".</li>
         <li>The objective is to draw three of the same marker in a row, vetical, horizontal, or diagonal.</li>
-        <li>In each round, both players will take a turn drawing their market in an empty space (denoted by the button
+        <li>In each round, both players will take a turn drawing their marker in an empty space (denoted by the button
             marked "Choose").</li>
         <li>Your turn is first.</li>
         <li>Press the "Start over" button to reset the game.</li>
