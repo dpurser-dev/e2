@@ -11,7 +11,20 @@ class AppController extends Controller
         $welcomes = ['Welcome', 'Aloha', 'Welkom', 'Bienvenidos', 'Bienvenu', 'Welkomma'];
         
         return $this->app->view('index', [
-            'welcome' => $welcomes[array_rand($welcomes)]
+            'welcome' => $welcomes[array_rand($welcomes)],
+            'time' => date('g:ia')
         ]);
+    }
+
+    public function contact()
+    {
+        return $this->app->view('contact', [
+            'email' => 'support@zipfoods.com'
+        ]);
+    }
+
+    public function test()
+    {
+        return 'Test successful';
     }
 }
