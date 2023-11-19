@@ -27,4 +27,10 @@ class AppController extends Controller
     {
         return 'Test successful';
     }
+
+    public function about()
+    {
+        return $this->app->view('about');
+    }
+    
 }
