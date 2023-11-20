@@ -12,6 +12,7 @@ All Products
     <a class='product-link' href='/product?sku={{ $product['sku'] }}'>
         <div>
             <div class='product-name'>{{ $product['name'] }}</div>
+            <!-- Query string added -->
             <img class='product-thumb' src="/images/products/{{ $product['sku'] }}.jpg">
         </div>
     </a>
