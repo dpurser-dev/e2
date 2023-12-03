@@ -25,7 +25,7 @@ Welcome to the world of TecheMono!
         <option value="store-general">General Store</option>
         <option value="store-toy">Toy Store</option>
     </select>
-    <button type="submit">Let's go!</button>
+    <button type="submit" id="button-override">Let's go!</button>
 </form>
 
 </p>

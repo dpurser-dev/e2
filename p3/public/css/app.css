@@ -81,6 +81,17 @@ body a {
 
 select {
     border-style: solid;
+    color: black !important;
+    background-color: white !important;
     border-color: black;
     border-width: 2px;
+}
+
+#place {
+    border-style: solid !important;
+    color: black !important;
+    background-color: white !important;
+    border-color: black !important;
+    border-width: 2px;
+    border-radius: 2px;
 }

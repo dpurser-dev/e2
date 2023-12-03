@@ -25,6 +25,8 @@ class AppController extends Controller
             $place_image = 'tm-place-adopt';
         }
 
+        #return $this->app->db()->all('p3');
+
         return $this->app->view('place', [
             'place' => $place,
             'place_name' => $place_name,
