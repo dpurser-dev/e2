@@ -1,0 +1,71 @@
+#logo {
+    width: 300px;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    padding-top: 60px;
+    padding-bottom: 60px;
+    margin-bottom: 60px;
+    background-color: #9c91c6 !important;
+    font-family: 'Dosis', sans-serif !important;
+}
+
+body a {
+    color: white !important;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    /*line-height: 60px;*/
+    /* Vertically center the text there */
+    background-color: #6c6994;
+    border-style: solid;
+    border-color: black !important;
+    border-width: 2px !important;
+    color: white !important;
+}
+
+#navbar-override {
+    background-color: #6c6994 !important;
+    color: white !important;
+    border-style: solid;
+    border-color: black !important;
+    border-width: 2px !important;
+}
+
+#navbar-override ul li a {
+    color: white;
+}
+
+#button-override {
+    color: black !important;
+    background-color: white !important;
+    border-color: black;
+    border-width: 2px;
+}
+
+#map-image {
+    border-style: solid;
+    border-color: black;
+    border-width: 2px;
+    border-radius: 20px;
+    display: block;
+    width: 100%;
+}
+
+.container {
+    margin-right: 15px !important;
+    margin-left: 15px !important;
+
+}
