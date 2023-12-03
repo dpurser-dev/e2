@@ -64,8 +64,23 @@ body a {
     width: 100%;
 }
 
+#place-image {
+    border-style: solid;
+    border-color: black;
+    border-width: 2px;
+    border-radius: 20px;
+    display: block;
+}
+
 .container {
     margin-right: 15px !important;
     margin-left: 15px !important;
+    width: 100% !important;
+    max-width: fit-content !important;
+}
 
+select {
+    border-style: solid;
+    border-color: black;
+    border-width: 2px;
 }

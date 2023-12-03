@@ -10,7 +10,8 @@ return [
     '/item' => ['AppController', 'showItem'],
     '/pet' => ['AppController', 'showPet'],
     '/user' => ['AppController', 'showUser'],
-    '/shop' => ['AppController', 'showShop'],
+    '/place' => ['AppController', 'showPlace'],
+    '/route-place' => ['AppController', 'routePlace'],
     '/bank' => ['AppController', 'bank'],
     '/adopt' => ['AppController', 'adopt']
 ];
