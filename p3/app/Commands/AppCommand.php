@@ -74,18 +74,32 @@ class AppCommand extends Command
             'username' => 'hes',
             'password' => 'helloworld',
             'date_joined' => date("Y-m-d"),
-            'money' => 0
+            'money' => 100
         ];
         $this->app->db()->insert('user', $user);
         dump('Seed successful.');
     }
 
     public function seedPets() {
-
+        $pet = [
+            'species' => 'Cute pet',
+            'image' => 'cute_pet.png'
+        ];
+        $this->app->db()->insert('pet', $pet);
+        dump('Seed successful.');
     }
 
     public function seedItems() {
-
+        $item = [
+            'name' => 'Yummy omlette',
+            'category_id' => 2,
+            'image' => 'yummy_omlette.png',
+            'effect_happiness' => 0,
+            'effect_hunger' => 1,
+            'cost' => 10        
+        ];
+        $this->app->db()->insert('item', $item);
+        dump('Seed successful.');    
     }
 
 }

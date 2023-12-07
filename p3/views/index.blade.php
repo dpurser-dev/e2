@@ -4,6 +4,10 @@
 Welcome to the world of TecheMono!
 @endsection
 
+@section('user-info')
+<b>Logged in as: </b> {{ $user['username'] }}
+@endsection
+
 @section('page-intro')
 <hr>
 <h3>We are so pleased to welcome you back.</h3>

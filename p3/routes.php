@@ -12,6 +12,7 @@ return [
     '/user' => ['AppController', 'showUser'],
     '/place' => ['AppController', 'showPlace'],
     '/route-place' => ['AppController', 'routePlace'],
+    '/route-login' => ['AppController', 'routeLogin'],
     '/bank' => ['AppController', 'bank'],
     '/adopt' => ['AppController', 'adopt']
 ];
