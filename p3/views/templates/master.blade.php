@@ -18,29 +18,13 @@
 
     <header id="header-override">
         <!-- Fixed navbar -->
-        <nav class=" navbar navbar-expand-md fixed-top" id="navbar-override">
-            <a class="navbar-brand" href="/">
-                <img src='/images/tm-logo.png' width="200" class="d-inline-block align-top" alt="">
-            </a>
-            <button id="button-override" class="navbar-toggler" type="button" data-toggle="collapse"
-                data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
-                aria-label="Toggle navigation">
-                Menu
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#">@yield('user-info')</a>
-                    </li>
-                </ul>
-            </div>
+        <nav class="navbar navbar-expand-md fixed-top" id="navbar-override">
 
+            <a class="navbar-brand" href="/">
+                <img src="/images/tm-logo.png" height="45" alt="">
+            </a>
+            @yield('user-info')
+            @yield('logout-button')
         </nav>
     </header>
 

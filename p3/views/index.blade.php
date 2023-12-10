@@ -5,14 +5,28 @@ Welcome to the world of TecheMono!
 @endsection
 
 @section('user-info')
-<b>Logged in as: </b> {{ $user['username'] }}
+@if ($user)
+<b>Logged in as:</b>
+<div id="username-text">{{ $user['username'] }}</div>
+@endif
+@endsection
+
+@section('logout-button')
+@if ($user)
+<ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="/route-logout"><button class="btn" id="button-override"
+                type=button>Logout</button></a>
+    </li>
+</ul>
+@endif
 @endsection
 
 @section('page-intro')
 <hr>
 <h3>We are so pleased to welcome you back.</h3>
-<p>The <b>TecheMono official calendar</b> indicates that the date today is: XXX </br>
-    The <b>Official TecheMetreological Society</b> is advising weather conditions of: XXX</p>
+<p>The <b>TecheMono official calendar</b> indicates that the date today is: {{ $date }} </br>
+    The <b>Official TecheMetreological Society</b> is advising weather conditions of: {{ $weather }}</p>
 <h4>Enjoy exploring!</h4>
 @endsection
 
@@ -27,15 +41,15 @@ Welcome to the world of TecheMono!
         <option value="bank">Bank</option>
         <option value="user">Home</option>
         <option value="store-general">General Store</option>
-        <option value="store-toy">Toy Store</option>
+        <option value="store-special">Special Store</option>
     </select>
     <button type="submit" id="button-override">Let's go!</button>
 </form>
 
 </p>
-<img id="map-image" src='/images/tm-map.png'>
+<img id="map-image" src='/images/tm-map-labelled.png'>
 <hr>
-<p>Pin a fixed-height footer to the bottom of the viewport in desktop browsers with this custom
-    HTML and CSS. A fixed navbar has been added width
+<p>Please use the dropdown menu above to navigate the map - in the future, the map itself will be clickable, so stay
+    tuned!
 </p>
 @endsection

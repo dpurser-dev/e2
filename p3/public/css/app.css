@@ -53,6 +53,7 @@ body a {
     background-color: white !important;
     border-color: black;
     border-width: 2px;
+    border-radius: 0px;
 }
 
 #map-image {
@@ -70,6 +71,25 @@ body a {
     border-width: 2px;
     border-radius: 20px;
     display: block;
+}
+
+#object-image {
+    border-style: solid;
+    border-color: black;
+    border-width: 2px;
+    border-radius: 10px;
+    width: 100px;
+    display: block;
+}
+
+#object-container {
+    background-color: lightgray;
+    border-color: black;
+    border-width: 2px;
+    border-style: solid;
+    padding: 10px;
+    margin: 10px;
+    display: inline-block;
 }
 
 .container {
@@ -94,4 +114,8 @@ select {
     border-color: black !important;
     border-width: 2px;
     border-radius: 2px;
+}
+
+#username-text {
+    margin-left: 5px;
 }

@@ -10,9 +10,13 @@ return [
     '/item' => ['AppController', 'showItem'],
     '/pet' => ['AppController', 'showPet'],
     '/user' => ['AppController', 'showUser'],
-    '/place' => ['AppController', 'showPlace'],
+    '/store' => ['AppController', 'showStore'],
+    '/adopt' => ['AppController', 'showAdopt'],
+    '/bank' => ['AppController', 'showBank'],
+    '/home' => ['AppController', 'showHome'],
     '/route-place' => ['AppController', 'routePlace'],
     '/route-login' => ['AppController', 'routeLogin'],
+    '/route-logout' => ['AppController', 'routeLogout'],
     '/bank' => ['AppController', 'bank'],
     '/adopt' => ['AppController', 'adopt']
 ];

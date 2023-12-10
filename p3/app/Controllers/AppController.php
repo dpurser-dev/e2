@@ -9,19 +9,32 @@ class AppController extends Controller
 
     public function index()
     {
-        ################################
         # Check if the user is logged in   
-
-        if (isset($_SESSION['user'])) {            
+        if (isset($_SESSION['user'])) {
+            
+            # Retrieve the user from the session super global
             $user = $_SESSION['user'];
+
+            # Randomly generate the weather from a defined array of weather outcomes
+            $weatherOptions = [
+                'Sunny',
+                'Cold',
+                'Raining',
+                'Overcast',
+                'Hot!'
+            ];
+            $randomIndex  = array_rand($weatherOptions);
+            $weather = $weatherOptions[$randomIndex];
+            $date = date("Y-m-d");
+
             return $this->app->view('index', [
-                'user' => $user
+                'user' => $user,
+                'weather' => $weather,
+                'date' => $date
             ]);
         } else {
             return $this->app->redirect('/login');
         }
-
-        
     }
 
     public function login()
@@ -67,26 +80,79 @@ class AppController extends Controller
     public function routePlace()
     {
         $place = $this->app->input('place');
-        return $this->app->redirect('/place?place=' . $place);
+
+        if ($place == "store-general" || $place == "store-special") {
+            return $this->app->redirect('/store?store=' . $place);
+        } elseif ($place == "adoption") {
+            return $this->app->redirect('/adoption');
+        }
     }
 
-    public function showPlace()
+    public function routeLogout()
     {
-        $place = $this->app->param('place');
+        # Clear the session
+        session_unset();
+        session_destroy();
+        session_start();
+
+        # Send the user home (which will redirect to login)
+        return $this->app->redirect('/');
+    }
+
+    public function showStore()
+    {
+        # Retrieve the user from the session super global
+        $user = $_SESSION['user'];
         
-        if($place=='adopt') {
-            $place_name = 'Adoption centre';
-            $place_text = 'Welcome to the adoption centre';
-            $place_image = 'tm-place-adopt';
+        # Get the store from the URL parameter
+        $store = $this->app->param('store');
+        
+        # Load in the store information
+        if($store=='store-general') {
+            $store_name = 'General store';
+            $store_text = 'Welcome to the general store';
+            $store_image = 'store_general';
+        } elseif($store == 'store-special') {
+            $store_name = 'Special store';
+            $store_text = 'Welcome to the special store';
+            $store_image = 'store_special';
         }
 
-        #return $this->app->db()->all('p3');
+        # Generate the items
+        $items = array();
+        $item_number = 5;
 
-        return $this->app->view('place', [
-            'place' => $place,
-            'place_name' => $place_name,
-            'place_text' => $place_text,
-            'place_image' => $place_image
+        $sql = 'SELECT rarity_id FROM item';
+        $executed = $this->app->db()->run($sql);
+        $executed = $executed->fetchAll();
+        $rarity_ids = array();
+        foreach($executed as $item) {
+            $rarity_ids[] = $item["rarity_id"];
+        }
+        $rarity_ids2 = array();
+        $rarity_ids2 = ["rarity_id" => $rarity_ids];
+        dump($rarity_ids2);
+
+        $sql = 'SELECT likelihood FROM rarity WHERE id = :rarity_id';
+        $executed = $this->app->db()->run($sql, $rarity_ids2);
+        $likelihoods = $executed->fetchAll();
+        #$likelihoods = array();
+        #foreach($executed as $item) {
+        #    $likelihoods = $item[0];
+        #}        
+        dump($likelihoods);
+        
+        for ($i = 0; $i < $item_number; $i++) {
+            $items = $i;
+        }
+
+        return $this->app->view('store', [
+            'user' => $user,
+            'store' => $store,
+            'store_name' => $store_name,
+            'store_text' => $store_text,
+            'store_image' => $store_image,
+            'items' => 10,
         ]);
     }
     

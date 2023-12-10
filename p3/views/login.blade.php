@@ -23,6 +23,6 @@ Welcome to the world of TecheMono!
 </form>
 
 <hr>
-<p>Remember: Do not share your password with anyone!
+<p><b>Remember:</b> Do not share your password with anyone!
 </p>
 @endsection
