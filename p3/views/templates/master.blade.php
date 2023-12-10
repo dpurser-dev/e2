@@ -35,6 +35,8 @@
 
         @yield('page-intro')
 
+        @yield('message')
+
         @yield('page-content')
 
     </main>

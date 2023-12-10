@@ -22,6 +22,9 @@ Welcome to the world of TecheMono!
 @endif
 @endsection
 
+@section('message')
+@endsection
+
 @section('page-intro')
 <hr>
 <h3>We are so pleased to welcome you back.</h3>

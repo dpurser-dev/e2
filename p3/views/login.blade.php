@@ -26,3 +26,6 @@ Welcome to the world of TecheMono!
 <p><b>Remember:</b> Do not share your password with anyone!
 </p>
 @endsection
+
+@section('message')
+@endsection
