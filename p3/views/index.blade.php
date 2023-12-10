@@ -39,7 +39,7 @@ Welcome to the world of TecheMono!
     <select id="place" name="place">
         <option value="adopt">Adoption Centre</option>
         <option value="bank">Bank</option>
-        <option value="user">Home</option>
+        <option value="home">Home</option>
         <option value="store-general">General Store</option>
         <option value="store-special">Special Store</option>
     </select>

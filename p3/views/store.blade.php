@@ -31,17 +31,25 @@
 
 @section('page-content')
 <hr>
-@for ($i = 1; $i <= $items; $i++) <div id='object-container'>
-    <img id='object-image' src='/images/omlettes/o1.png'>
-    <p>Delicious omlette <br>
-        <b>Cost:</b> 100tm<br>
-        <b>Rarity:</b> Common
-    </p>
-    <button id="button-override">Buy</button>
-    </div>
-    @endfor
 
-    <p>Pin a fixed-height footer to the bottom of the viewport in desktop browsers with this custom
-        HTML and CSS. A fixed navbar has been added width
+@foreach($inventory as $item)
+
+<div id='object-container'>
+    <img id='object-image' src='/images/{{ $item["image"]}}'>
+    <p>{{ $item['name'] }}<br>
+        <b>Cost:</b> {{ $item['cost']}}<br>
+        <b>Rarity:</b> <span id='rarity-{{$item["rarity_id"]}}'>{{ $rarity[$item['rarity_id'] - 1]['name'] }}</span>
     </p>
-    @endsection
+    <form method='POST' action="/buy">
+        <input type="hidden" id="cost" name="cost" value="{{$item['cost']}}">
+        <input type="hidden" id="id" name="id" value="{{$item['id']}}">
+        <button type="submit" id="button-override">Buy</button>
+    </form>
+</div>
+
+@endforeach
+
+<p><b>Remember:</b> Store inventories are dynamic and change constantly. If you see something that you like, don't
+    hesitate to buy it, or you might miss out!
+</p>
+@endsection

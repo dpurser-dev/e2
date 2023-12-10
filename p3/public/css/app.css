@@ -119,3 +119,23 @@ select {
 #username-text {
     margin-left: 5px;
 }
+
+#rarity-1 {
+    color: black;
+}
+
+#rarity-2 {
+    color: #33cc33;
+}
+
+#rarity-3 {
+    color: #ff9933;
+}
+
+#rarity-4 {
+    color: #9933ff;
+}
+
+#rarity-5 {
+    color: #ff00ff;
+}
