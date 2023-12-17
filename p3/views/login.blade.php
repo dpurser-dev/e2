@@ -16,10 +16,10 @@ Welcome to the world of TecheMono!
 
 <form method='POST' action="/route-login">
     <label for="username">Username:</label>
-    <input type="text" id="username" name="username" required>
+    <input test="username-input" type="text" id="username" name="username" required>
     <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required>
-    <button type="submit">Login</button>
+    <input test="password-input" type="password" id="password" name="password" required>
+    <button test="login-button" type="submit">Login</button>
 </form>
 
 <hr>
@@ -28,4 +28,15 @@ Welcome to the world of TecheMono!
 @endsection
 
 @section('message')
+@if($message)
+
+<span id="hidden-message" test="message-type">{{$message_type}}</span>
+
+<p class='message-{{$message_type}}'>
+    <span test='message-outcome'>
+        {{ $message }}
+    </span>
+</p>
+
+@endif
 @endsection

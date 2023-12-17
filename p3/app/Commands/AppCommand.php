@@ -207,6 +207,14 @@ class AppCommand extends Command
         dump('Seed rarities successful.');    
     }
 
-
+    public function seedAll()
+    {
+        $this->migrate();
+        $this->seedRarities();
+        $this->seedItemCategories();
+        $this->seedItems();
+        $this->seedPets();
+        $this->seedUser();
+    }
 
 }

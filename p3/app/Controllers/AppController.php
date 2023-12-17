@@ -1,7 +1,6 @@
 <?php
 namespace App\Controllers;
 
-use Exception;
 use App\User;
 
 class AppController extends Controller
@@ -9,6 +8,10 @@ class AppController extends Controller
 
     public function index()
     {
+        # Check for messages
+        $message_type = $this->app->old('message_type');
+        $message = $this->app->old('message');
+
         # Check if the user is logged in   
         if (isset($_SESSION['user'])) {
             
@@ -30,21 +33,41 @@ class AppController extends Controller
             return $this->app->view('index', [
                 'user' => $user,
                 'weather' => $weather,
-                'date' => $date
+                'date' => $date,
+                'message_type' => $message_type,
+                'message' => $message
             ]);
         } else {
-            return $this->app->redirect('/login');
+            return $this->app->redirect('/login', [
+                'message_type' => $message_type,
+                'message' => $message                
+            ]);
         }
     }
 
     public function login()
     {
-        return $this->app->view('login');
+        $message_type = $this->app->old('message_type');
+        $message = $this->app->old('message');
+        
+        return $this->app->view('login', [
+            'message_type' => $message_type,
+            'message' => $message
+        ]);
     }
 
     public function routeLogin()
     {
-        # Check that the required  fields were submitted
+        # Conduct form validation (also repeated below)
+        $this->app->validate([
+            'username' => 'required',
+            'password' => 'required'
+        ]);
+        
+        # If the above validation checks fail, user is redirected back to home
+        # Code below is not executed
+
+        # Double check that the required  fields were submitted
         if (isset($_POST['username']) && isset($_POST['password'])) {
 
             # Store the submitted fields
@@ -56,7 +79,10 @@ class AppController extends Controller
 
             # Return the user to the login screen if the user is not found
             if (empty($user_db)) {
-                return $this->app->redirect('/login');
+                return $this->app->redirect('/login', [
+                    'message_type' => "error",
+                    'message' => "User not found"
+                ]);
             } 
 
             # Create a new instanced of the user class, using the returned user details from the database
@@ -64,13 +90,19 @@ class AppController extends Controller
 
             # Return the user to the login screen if the password does not match
             if (!($user -> ValidateUser($password))) {
-                return $this->app->redirect('/login');
+                return $this->app->redirect('/login', [
+                    'message_type' => 'error',
+                    'message' => "Password does not match"
+                ]);
             }
 
             # Store the user in the session
             $_SESSION['user'] = $user -> getDetails();
 
-            return $this->app->redirect('/');
+            return $this->app->redirect('/', [
+                'message_type' => 'success',
+                'message' => "Log in successful"
+            ]);
 
         } else {
             return $this->app->redirect('/login');
@@ -79,8 +111,14 @@ class AppController extends Controller
 
     public function routePlace()
     {
+        $this->app->validate([
+            'place' => 'required',
+        ]);
+        # If the above validation checks fail, user is redirected back to home
+        # Code below is not executed
+        
         $place = $this->app->input('place');
-
+        
         if ($place == "store-general" || $place == "store-special") {
             return $this->app->redirect('/store?store=' . $place);
         } elseif ($place == "bank") {
@@ -99,12 +137,27 @@ class AppController extends Controller
         session_destroy();
         session_start();
 
-        # Send the user home (which will redirect to login)
-        return $this->app->redirect('/');
+        # Send the user home
+        return $this->app->redirect('/login', [
+            'message_type' => "success",
+            'message' => "Log out successful"
+        ]);
     }
 
     public function showStore()
     {
+        # Check for messages
+        $message_type = $this->app->old('message_type');
+        $message = $this->app->old('message');
+
+        # Redirect the user if they are not logged in  
+        if (!isset($_SESSION['user'])) {
+            return $this->app->redirect('/login', [
+                'message_type' => "error",
+                'message' => "You must be logged in to see this page"
+            ]);
+        }
+
         # Retrieve the user from the session super global
         $user = $_SESSION['user'];
         
@@ -175,11 +228,25 @@ class AppController extends Controller
             'store_text' => $store_text,
             'store_image' => $store_image,
             'inventory' => $inventory,
-            'rarity' => $rarity
+            'rarity' => $rarity,
+            'message_type' => $message_type,
+            'message' => $message
         ]);
     }
 
     public function showBank() {
+        # Check for messages
+        $message_type = $this->app->old('message_type');
+        $message = $this->app->old('message');
+
+        # Redirect the user if they are not logged in  
+        if (!isset($_SESSION['user'])) {
+            return $this->app->redirect('/login', [
+                'message_type' => "error",
+                'message' => "You must be logged in to see this page"
+            ]);
+        }
+        
         # Retrieve the user from the session super global
         $user = $_SESSION['user'];
         $place_name = 'TecheMono Bank';
@@ -190,10 +257,24 @@ class AppController extends Controller
             'place_name' => $place_name,
             'place_text' => $place_text,
             'place_image' => $place_image,
+            'message_type' => $message_type,
+            'message' => $message
         ]);
     }
 
     public function showCenter() {
+        # Check for messages
+        $message_type = $this->app->old('message_type');
+        $message = $this->app->old('message');
+
+        # Redirect the user if they are not logged in  
+        if (!isset($_SESSION['user'])) {
+            return $this->app->redirect('/login', [
+                'message_type' => "error",
+                'message' => "You must be logged in to see this page"
+            ]);
+        }
+
         # Retrieve the user from the session super global
         $user = $_SESSION['user'];
         $place_name = 'Adoption Center';
@@ -246,7 +327,9 @@ class AppController extends Controller
             'place_text' => $place_text,
             'place_image' => $place_image,
             'inventory' => $inventory,
-            'rarity' => $rarity
+            'rarity' => $rarity,
+            'message_type' => $message_type,
+            'message' => $message
         ]);
     }
     
@@ -282,10 +365,16 @@ class AppController extends Controller
             $user = new User($user_db);
             $_SESSION['user'] = $user -> getDetails();
             
-            # Send the user home (which will redirect to login)
-            return $this->app->redirect('/');
+            # Send the user to their home
+            return $this->app->redirect('/home', [
+                'message_type' => 'success',
+                'message' => "Purchase successful"
+            ]);
         } else {
-            return $this->app->redirect('/');
+            return $this->app->redirect('/home', [
+                'message_type' => 'error',
+                'message' => "Sorry, you don't have enough money to make this purchase"
+            ]);
         }
     }
 
@@ -313,14 +402,31 @@ class AppController extends Controller
                 'date_play' => date("Y-m-d")
             ];
             $this->app->db()->insert('pet_ownership', $data);
-            return $this->app->redirect('/home');
+            return $this->app->redirect('/home', [
+                'message_type' => 'success',
+                'message' => "Congratulations on your new pet!"
+            ]);
         } else {
-            return $this->app->redirect('/center');
+            return $this->app->redirect('/center', [
+                'message_type' => 'error',
+                'message' => "You already have a pet!"
+            ]);
         }
     }
 
     public function showHome() {
+        # Check for messages
+        $message_type = $this->app->old('message_type');
+        $message = $this->app->old('message');
 
+        # Redirect the user if they are not logged in  
+        if (!isset($_SESSION['user'])) {
+            return $this->app->redirect('/login', [
+                'message_type' => "error",
+                'message' => "You must be logged in to see this page"
+            ]);
+        }
+        
         # Retrieve the user from the session super global
         $user = $_SESSION['user'];
 
@@ -329,11 +435,15 @@ class AppController extends Controller
         $executed = $this->app->db()->run($sql);
         $pet_ownership = $executed->fetchAll();
 
-        # Get the pet
-        $sql = 'SELECT * FROM pet WHERE id = "' . $pet_ownership[0]['pet_id'] . '"';
-        $executed = $this->app->db()->run($sql);
-        $pet = $executed->fetchAll();
+        $pet = array();
 
+        if($pet_ownership) {
+            # Get the pet
+            $sql = 'SELECT * FROM pet WHERE id = "' . $pet_ownership[0]['pet_id'] . '"';
+            $executed = $this->app->db()->run($sql);
+            $pet = $executed->fetchAll();
+        }
+        
         # Get the item ownership
         $sql = 'SELECT * FROM item_ownership WHERE username = "' . $user['username'] . '"';
         $executed = $this->app->db()->run($sql);
@@ -365,7 +475,9 @@ class AppController extends Controller
             'pet' => $pet,
             'pet_ownership' => $pet_ownership,
             'items' => $items,
-            'rarity' => $rarity
+            'rarity' => $rarity,
+            'message_type' => $message_type,
+            'message' => $message
         ]);
 
     }

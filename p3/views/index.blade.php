@@ -11,18 +11,29 @@ Welcome to the world of TecheMono!
 @endif
 @endsection
 
+@section('message')
+@if($message)
+
+<span id="hidden-message" test="message-type">{{$message_type}}</span>
+
+<p class='message-{{$message_type}}'>
+    <span test='message-outcome'>
+        {{ $message }}
+    </span>
+</p>
+
+@endif
+@endsection
+
 @section('logout-button')
 @if ($user)
 <ul class="navbar-nav ml-auto">
     <li class="nav-item">
-        <a class="nav-link" href="/route-logout"><button class="btn" id="button-override"
+        <a class="nav-link" href="/route-logout" test='logout-button'><button class="btn" id="button-override"
                 type=button>Logout</button></a>
     </li>
 </ul>
 @endif
-@endsection
-
-@section('message')
 @endsection
 
 @section('page-intro')

@@ -15,7 +15,7 @@
 @if ($user)
 <ul class="navbar-nav ml-auto">
     <li class="nav-item">
-        <a class="nav-link" href="/route-logout"><button class="btn" id="button-override"
+        <a class="nav-link" href="/route-logout" test='logout-button'><button class="btn" id="button-override"
                 type=button>Logout</button></a>
     </li>
 </ul>
@@ -32,6 +32,7 @@
 
 <p>Your pet</p>
 
+@if($pet)
 <div id='object-container'>
     <img id='object-image' src='/images/pets/{{ $pet[0]["image"]}}'>
     <p>Number {{ $pet[0]['id'] -1 }}<br>
@@ -39,6 +40,7 @@
         <b>Rarity:</b> <span id='rarity-{{$pet["rarity_id"]}}'>{{ $rarity[$pet[0]['rarity_id'] - 1]['name'] }}</span>
     </p>
 </div>
+@endif
 
 <hr>
 
@@ -60,13 +62,22 @@
 </div>
 
 @endforeach
+@endsection
 
+@section('message')
+@if($message)
 
+<span id="hidden-message" test="message-type">{{$message_type}}</span>
+
+<p class='message-{{$message_type}}'>
+    <span test='message-outcome'>
+        {{ $message }}
+    </span>
+</p>
+
+@endif
 @endsection
 
 @section('page-content')
 <hr>
-
-
-
 @endsection

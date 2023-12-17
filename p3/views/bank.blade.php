@@ -15,7 +15,7 @@
 @if ($user)
 <ul class="navbar-nav ml-auto">
     <li class="nav-item">
-        <a class="nav-link" href="/route-logout"><button class="btn" id="button-override"
+        <a class="nav-link" href="/route-logout" test='logout-button'><button class="btn" id="button-override"
                 type=button>Logout</button></a>
     </li>
 </ul>
@@ -28,7 +28,7 @@
 <hr>
 <p>{{ $place_text }}</p>
 <p>You may view your account balance below:</p>
-<p><b>Account balance: </b> {{ $user['money'] }} tm</p>
+<p><b>Account balance: </b> <span test='money-amount'>{{ $user['money'] }}<span> tm</p>
 @endsection
 
 @section('page-content')
@@ -36,4 +36,19 @@
 
 
 
+@endsection
+
+
+@section('message')
+@if($message)
+
+<span id="hidden-message" test="message-type">{{$message_type}}</span>
+
+<p class='message-{{$message_type}}'>
+    <span test='message-outcome'>
+        {{ $message }}
+    </span>
+</p>
+
+@endif
 @endsection

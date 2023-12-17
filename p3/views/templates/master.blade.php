@@ -32,11 +32,8 @@
     <main role="main" class="container">
 
         <h1 class="mt-5">@yield('page-title')</h1>
-
-        @yield('page-intro')
-
         @yield('message')
-
+        @yield('page-intro')
         @yield('page-content')
 
     </main>

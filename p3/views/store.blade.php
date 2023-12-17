@@ -15,7 +15,7 @@
 @if ($user)
 <ul class="navbar-nav ml-auto">
     <li class="nav-item">
-        <a class="nav-link" href="/route-logout"><button class="btn" id="button-override"
+        <a class="nav-link" href="/route-logout" test='logout-button'><button class="btn" id="button-override"
                 type=button>Logout</button></a>
     </li>
 </ul>
@@ -43,7 +43,7 @@
     <form method='POST' action="/buy">
         <input type="hidden" id="cost" name="cost" value="{{$item['cost']}}">
         <input type="hidden" id="id" name="id" value="{{$item['id']}}">
-        <button type="submit" id="button-override">Buy</button>
+        <button type="submit" test='purchase-button' id="button-override">Buy</button>
     </form>
 </div>
 
@@ -52,4 +52,19 @@
 <p><b>Remember:</b> Store inventories are dynamic and change constantly. If you see something that you like, don't
     hesitate to buy it, or you might miss out!
 </p>
+@endsection
+
+
+@section('message')
+@if($message)
+
+<span id="hidden-message" test="message-type">{{$message_type}}</span>
+
+<p class='message-{{$message_type}}'>
+    <span test='message-outcome'>
+        {{ $message }}
+    </span>
+</p>
+
+@endif
 @endsection
